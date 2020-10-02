@@ -1,0 +1,41 @@
+version: '3.7'
+
+services:
+  redis-cep:
+    container_name: redis-cep
+    image: fernandofreire/redis-cep:basic
+    volumes:
+      - 'redis-cep'
+    ports:
+      - 6379:6379
+  cep-worker:
+    container_name: cep-worker
+    image: fernandofreire/cep-worker:minicloud
+#    command: java -cp target/CEPWorker-1.0.jar worker.Processor
+    environment:
+    - MODE=nomono
+    - INITIATE_OTHER_WORKERS=true
+    - RABBITMQ_HOST=rabbitmq-cep
+    - REDIS_CEP_HOST=redis-cep
+    - LOGS_THREADHANDLER=true
+    - LOGS_INCLUSION=true
+    - LOGS_EVENTHANDLER=false
+    - LOGS_RESOURCEANALYSIS=false
+    - LBA=inputsimilarity
+    - TIMEOUT_A=30000
+    depends_on:
+      - redis-cep
+  rabbitmq-cep:
+    container_name: rabbitmq-cep
+    image: fernandofreire/rabbitmq-cep:latest
+    ports:
+      - 5672:5672
+  nats-cep:
+    container_name: nats-cep
+    image: nats:2.0.4-linux
+    
+networks:
+  default:
+    external:
+      name: platform 
+

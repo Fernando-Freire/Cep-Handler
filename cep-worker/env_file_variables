@@ -1,0 +1,58 @@
+WORKER_ID=1                                                                  # ID of cep-worker
+IMAGE=registry.gitlab.com/interscity/interscity-platform/cep-worker:latest   # docker image address for multiple workers running
+REDIS_CEP_HOST=redis-cep                                                     # name of redis container
+REDIS_CEP_PASS=                                                              # redis password 
+REDIS_CEP_PORT=6379                                                          # redis port
+BROKER=Rabbitmq                                                              # choice of broker to be used
+NATS_HOST=nats-cep                                                           # name of nats container
+NATS_PORT=4222                                                               # nats port
+RABBITMQ_HOST=rabbitmq-cep                                                   # name of rabbitmq container
+RABBITMQ_USERNAME=                                                           # rabbitmq default username
+RABBITMQ_PASSWORD=                                                           # rabbitmq default password
+EXCHANGE=EXCHANGE                                                            # rabbitmq exchange name
+MODE=mono                                                                    # Mode of execution(mono for single container and any other string for multiple containers)
+LBA=inputsimilarity                                                          # Load Balancing Algorithm ( stateusage or inputsimilarity)
+TIMEOUT_A=100000                                                             # frequency of checking database for accepting new events (in microseconds)
+TIMEOUT_U=100000                                                             # frequency of checking worker underload (in microseconds)
+TIMEOUT_O=100000                                                             # frequency of checking worker overload (in microseconds)
+
+INITIATE_OTHER_WORKERS                                                       # check true or false to enable cluster handling and horizontal scalability
+
+SOFT_OVERLOAD=0.75                                                           # percentage of resource usage to stop accepting alocation of new event types
+HARD_OVERLOAD=0.85                                                           # percentage of resource usage to trigger creation of new instance of cep-worker
+UNDERLOAD=0.10                                                               # percentage of resource usage to triggger realocation of all event types and instance shutdown
+
+REQUEST_MEMORY=4000                                                    # quantity of average memory in Mb to be requested by kubernetes API
+LIMIT_MEMORY=4100                                                      # quantity of limit memory in Mb to be requested by kubernetes API
+
+
+
+
+
+
+IMAGE_TAG=cloud                                                              # tag of docker image for subsequent cep-worker created
+
+LOGS_THREADHANDLER=true                                                      # enable logs for Threadhandler
+LOGS_EVENTHANDLER=false                                                      # enable logs for eventhadler
+LOGS_OVERLOAD=true                                                           # enable logs for overload detection cycle
+LOGS_UNDERLOAD=true                                                          # enable logs for underload detection cycle
+LOGS_INITIATE=true                                                           # enable logs for acception of event types cycle
+LOGS_KUBERNETES=true                                                         # enable logs for pod creation and deletion
+LOGS_PROCESSOR=false                                                         # enable logs for Processor Class
+LOGS_RELOCATION=true                                                         # enable logs for event types realocation
+LOGS_DELETION=false                                                          # enable logs for event type deletion
+LOGS_INCLUSION=false                                                         # enable logs for event type inclusion
+LOGS_RESOURCEANALYSIS=false                                                  # enable logs for ResourceAnalysis Class
+LOGS_RECEIVER=false                                                          # enable logs for RabbitmqReceiver Class
+
+
+RMODE conn                                                               # type of RabbitmqReceiver distribution of event type subscription
+#conn, channel or empty
+# conn - 1 connection, many channels, 1 queue per channel
+# channel - 1 connection, 1 channel, many queues
+# empty - many connections, 1 channel per connection, 1 queue per channel
+
+
+
+
+remove #comentaries when creating env_file

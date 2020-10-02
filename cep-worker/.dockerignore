@@ -1,0 +1,40 @@
+# Git metadata
+.git
+.gitignore
+
+# Docker configuration files
+.dockerignore
+Dockerfile
+docker-compose.yml
+
+# IDEs
+.idea
+.vscode
+
+# Documentation
+README.md
+LICENSE
+
+target/
+
+.classpath
+
+.project
+
+CEP-Worker.iml
+CEPWorker.iml
+env_file_variables
+
+clusterrole.yaml
+
+dependency-reduced-pom.xml
+
+.gitlab-ci.yml
+
+go.sum
+
+src/test/
+
+scripts/
+
+cep-worker.yaml

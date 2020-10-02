@@ -1,0 +1,5 @@
+.dockerignore
+
+/temp
+
+docker-compose.yml

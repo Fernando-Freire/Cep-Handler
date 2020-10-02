@@ -1,0 +1,42 @@
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: exp-pvc
+#spec:
+#  accessModes:
+#    - ReadWriteOnce
+#  resources:
+#    requests:
+#      storage: 10Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: experiment
+  namespace: default
+spec:
+  containers:
+  - image: fernandofreire/experiment:jedis
+    name: experiment
+    env:
+    - name: TYPES
+      value: "savethis"
+    - name: CHECK_REDIS
+      value: "false"
+#    volumeMounts:
+#    - name: exp-volume
+#      mountPath: /experiment/data
+    resources:
+      requests:
+        memory: "10000Mi"
+      limits:
+        memory: "10100Mi"
+  restartPolicy: OnFailure
+#  volumes:
+#  - name: exp-volume
+#    persistentVolumeClaim:
+#      claimName: exp-pvc
+
+
+#valores de sobrecarga?? achar referencias - k8s
+#experimento variando Min_overload 50,60,70,80,90
